@@ -1,14 +1,10 @@
-%h4 Backlog
-%ul
-  - @backlog.each.with_index do |issue, index|
-    %li= "#{index + 1}. #{issue['title']}"
-
-%h4 In progress
-%ul
-  - @in_progress.each.with_index do |issue, index|
-    %li= "#{index + 1}. #{issue['title']}"
-
-%h4 Done
-%ul
-  - @done.each.with_index do |issue, index|
-    %li= "#{index + 1}. #{issue['title']}"
+.container
+  .row
+    - [ { issues: @backlog, title: 'Backlog', style: 'alert-warning' },
+        { issues: @in_progress, title: 'In Progress', style: 'alert-info' },
+        { issues: @done, title: 'Done', style: 'alert-success' } ].each do |column|
+      .col-md-4
+        %h4= column[:title]
+        - column[:issues].each do |issue|
+          .alert{ class: column[:style] }
+            = issue['title']
