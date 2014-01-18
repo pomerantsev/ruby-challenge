@@ -1,3 +1,14 @@
+%h4 Backlog
 %ul
-  - @all_issues.each.with_index do |issue, index|
+  - @backlog.each.with_index do |issue, index|
+    %li= "#{index + 1}. #{issue['title']}"
+
+%h4 In progress
+%ul
+  - @in_progress.each.with_index do |issue, index|
+    %li= "#{index + 1}. #{issue['title']}"
+
+%h4 Done
+%ul
+  - @done.each.with_index do |issue, index|
     %li= "#{index + 1}. #{issue['title']}"
