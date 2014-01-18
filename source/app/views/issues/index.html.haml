@@ -1,1 +1,3 @@
-= @issues
+%ul
+  - @all_issues.each.with_index do |issue, index|
+    %li= "#{index + 1}. #{issue['title']}"
