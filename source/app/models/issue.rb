@@ -1,20 +1,21 @@
 class Issue
   def self.backlog
-    @issues ||= Issue.get_issues
-    @issues.select { |issue| issue['state'] == 'open' && !issue['pull_request']['html_url'] }
+    issues.select { |issue| issue['state'] == 'open' && !issue['pull_request']['html_url'] }
   end
 
   def self.in_progress
-    @issues ||= Issue.get_issues
-    @issues.select { |issue| issue['state'] == 'open' && issue['pull_request']['html_url'] }
+    issues.select { |issue| issue['state'] == 'open' && issue['pull_request']['html_url'] }
   end
 
   def self.done
-    @issues ||= Issue.get_issues
-    @issues.select { |issue| issue['state'] == 'closed' }
+    issues.select { |issue| issue['state'] == 'closed' }
   end
 
   private
+
+  def self.issues
+    @issues ||= get_issues
+  end
 
   def self.get_issues
     issues_by_state = {}
